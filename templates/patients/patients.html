@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Patients List</h2>
+    <a href="{{ url_for('add_patient') }}">Add New Patient</a>
+    <table>
+        <thead>
+            <tr>
+                {% if patients %}
+                    {% for column in patients[0].keys() %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+            <tr>
+                {% for value in patient.values() %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

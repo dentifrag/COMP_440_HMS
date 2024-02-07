@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Appointments</h2>
+    <a href="{{ url_for('add_appointment') }}">Add New Appointment</a>
+    <table>
+        <thead>
+            <tr>
+                {%  if appointments %}
+                    {% for column in appointments[0] %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+                <tr>
+                    {% for value in appointment.values() %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

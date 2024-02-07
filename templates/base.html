@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>Hospital Management System</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/patients">Patients</a></li>
+                    <li><a href="/doctors">Doctors</a></li>
+                    <li><a href="/appointments">Appointments</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
