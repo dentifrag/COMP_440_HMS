@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Appointment List</h2>
+    <h2>Patients List</h2>
     <a href="{{ url_for('appointments.add_appointment') }}">Add New Appointment</a>
+    <a href="{{ url_for('appointments.edit_appointment', appointment_id = appointments[0].appointment_id) }}">Edit Appointment</a>
+    <a href="{{ url_for('appointments.delete_appointment', appointment_id=appointments[0].appointment_id) }}">Delete Appointment</a>
     <table>
         <thead>
             <tr>
@@ -16,15 +18,8 @@
         <tbody>
             {% for appointment in appointments %}
             <tr>
-                {% set loop_index = loop.index0 %}
                 {% for value in appointment.values() %}
-                    <td>
-                        {% if loop.index0 == 0 %}
-                            <a href="{{ url_for('appointments.appointments', appointment_id=value) }}">{{ value }}</a>
-                        {% else %}
-                            {{ value }}
-                        {% endif %}
-                    </td>
+                    <td>{{ value }}</td>
                 {% endfor %}
             </tr>
             {% endfor %}

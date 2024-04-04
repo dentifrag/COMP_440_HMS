@@ -123,3 +123,23 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #46918f;
 }
+
+.button-link {
+    background-color: transparent;
+    color: #50b3a2;
+    padding: 10px 20px;
+    border: 2px solid #50b3a2;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none; /* Remove underline from links */
+    display: inline-block; /* Align correctly with other inline or inline-block elements */
+    margin: 5px; /* Spacing around the button */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button-link:hover, .button-link:focus {
+    background-color: #50b3a2;
+    color: white;
+    text-decoration: none; /* Ensure underline doesn't reappear on hover */
+}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Edit Appointment</h2>
+    <form method="POST" class="form-style">
+        <div class="form-group">
+            <label for="dob">Date:</label>
+            <input type="date" name="date" required>
+        </div>
+        <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" name="time" id="time" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="contact_info">Purpose:</label>
+            <input type="text" name="purpose" value="{{ appointment.purpose }}">
+        </div>
+        <div class="form-group">
+            <label for="doctor">Doctor</label>
+            <select name="doctor" id="doctor" class="form-control">
+                <option value="">Select Doctor</option>
+                {% for doctor in doctors %}
+                    <option value="{{ doctor.doctor_id }}">{{ doctor.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="patient">Patient</label>
+            <select name="patient" id="patient" class="form-control">
+                <option value="">Select Patient</option>
+                {% for patient in patients %}
+                    <option value="{{ patient.patient_id }}">{{ patient.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Update appointment">
+        </div>
+    </form>
+{% endblock %}

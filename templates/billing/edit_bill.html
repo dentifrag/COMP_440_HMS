@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Edit Bill</h2>
+<form method="POST" class="form-style">
+    <div class="form-group">
+        <label for="patient">Patient</label>
+        <label for="patient">{{ patient[1] }}</label>
+    </div>
+    <div class="form-group">
+        <label for="time">Amount</label>
+        <input type="number" name="amount" id="amount" class="form-control" value="{{ bill.amount }}">
+    </div>
+    <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date" name="date" id="date" class="form-control" value="{{ bill.bill_date }}">
+    </div>
+    <div class="form-group">
+        <label for="status">Status</label>
+        <select name="status" id="status" class="form-control">
+            <option value="Paid">Paid</option>
+            <option value="Pending">Pending</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="payment_method">Payment Method</label>
+        <select name="payment_method" id="payment_method" class="form-control">
+            <option value="Cash">Cash</option>
+            <option value="Check">Check</option>
+            <option value="Card">Card</option>
+            <option value="Insurance">Insurance</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Edit bill">
+    </div>
+
+</form>
+{% endblock %}

@@ -3,6 +3,8 @@
 {% block content %}
     <h2>Patients List</h2>
     <a href="{{ url_for('patients.add_patient') }}">Add New Patient</a>
+    <a href="{{ url_for('patients.edit_patient', patient_id = patients[0].patient_id) }}">Edit Patient</a>
+    <a href="{{ url_for('patients.delete_patient', patient_id=patients[0].patient_id) }}">Delete Patient</a>
     <table>
         <thead>
             <tr>
@@ -16,15 +18,8 @@
         <tbody>
             {% for patient in patients %}
             <tr>
-                {% set loop_index = loop.index0 %}
                 {% for value in patient.values() %}
-                    <td>
-                        {% if loop.index0 == 0 %} <!-- Assuming the first value is patient_id -->
-                            <a href="{{ url_for('patients.patients', patient_id=value) }}">{{ value }}</a>
-                        {% else %}
-                            {{ value }}
-                        {% endif %}
-                    </td>
+                    <td>{{ value }}</td>
                 {% endfor %}
             </tr>
             {% endfor %}
