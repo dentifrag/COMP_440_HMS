@@ -6,26 +6,21 @@
     <table>
         <thead>
             <tr>
-                {% if appointments %}
-                    {% for column in appointments[0].keys() %}
-                        <th>{{ column }}</th>
-                    {% endfor %}
-                {% endif %}
+                <th>Appointment ID</th>
+                <th>Date</th>
+                <th>Purpose</th>
+                <th>Doctor's Name</th>
+                <th>Patient's Name</th>
             </tr>
         </thead>
         <tbody>
             {% for appointment in appointments %}
             <tr>
-                {% set loop_index = loop.index0 %}
-                {% for value in appointment.values() %}
-                    <td>
-                        {% if loop.index0 == 0 %}
-                            <a href="{{ url_for('appointments.appointments', appointment_id=value) }}">{{ value }}</a>
-                        {% else %}
-                            {{ value }}
-                        {% endif %}
-                    </td>
-                {% endfor %}
+                <td><a href="{{ url_for('appointments.appointments', appointment_id=appointment.appointment_id) }}">{{ appointment.appointment_id }}</a></td>
+                <td>{{ appointment.appointment_date }}</td>
+                <td>{{ appointment.purpose }}</td>
+                <td>{{ appointment.doctor_name }}</td>
+                <td>{{ appointment.patient_name }}</td>
             </tr>
             {% endfor %}
         </tbody>

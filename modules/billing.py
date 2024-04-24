@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from app import mysql
+from db import mysql
 
 billing_bp = Blueprint('billing', __name__)
 
@@ -7,9 +7,15 @@ billing_bp = Blueprint('billing', __name__)
 @billing_bp.route('/', methods=['GET'], defaults={'bill_id': None})
 @billing_bp.route('/<bill_id>', methods=['GET'])
 def billing(bill_id):
+    cur = mysql.connection.cursor()
     if bill_id is not None:
-        cur = mysql.connection.cursor()
-        result = cur.execute("SELECT * FROM billing WHERE bill_id = %s", (bill_id,))
+        # Query to get a specific bill along with patient name
+        result = cur.execute("""
+            SELECT b.bill_id, b.amount, b.bill_date, b.payment_status, p.name AS patient_name
+            FROM billing b
+            JOIN patients p ON b.patient_id = p.patient_id
+            WHERE b.bill_id = %s
+        """, (bill_id,))
         billing_ = []
 
         if result > 0:
@@ -19,15 +25,21 @@ def billing(bill_id):
         cur.close()
         return render_template('billing/view_bill.html', billing=billing_)
     else:
-        cur = mysql.connection.cursor()
-        result = cur.execute("SELECT * FROM billing")
+        # Query to get all bills along with patient names
+        result = cur.execute("""
+            SELECT b.bill_id, b.amount, b.bill_date, b.payment_status, p.name AS patient_name
+            FROM billing b
+            JOIN patients p ON b.patient_id = p.patient_id
+        """)
         billing_ = []
 
         if result > 0:
             data = cur.fetchall()
             billing_ = [dict(zip([key[0] for key in cur.description], row)) for row in data]
+
         cur.close()
         return render_template('billing/billing.html', billing=billing_)
+
 
 
 @billing_bp.route('/add_bill', methods=['GET', 'POST'])

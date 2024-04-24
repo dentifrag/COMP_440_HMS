@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from app import mysql
+from db import mysql
 
 appointments_bp = Blueprint('appointments', __name__)
 
@@ -7,9 +7,16 @@ appointments_bp = Blueprint('appointments', __name__)
 @appointments_bp.route('/', methods=['GET'], defaults={'appointment_id': None})
 @appointments_bp.route('/<appointment_id>', methods=['GET'])
 def appointments(appointment_id):
+    cur = mysql.connection.cursor()
     if appointment_id is not None:
-        cur = mysql.connection.cursor()
-        result = cur.execute("SELECT * FROM appointments WHERE appointment_id = %s", (appointment_id,))
+        # Query to get a specific appointment along with doctor and patient names
+        result = cur.execute("""
+            SELECT a.appointment_id, a.appointment_date, a.purpose, d.name AS doctor_name, p.name AS patient_name
+            FROM appointments a
+            JOIN doctors d ON a.doctor_id = d.doctor_id
+            JOIN patients p ON a.patient_id = p.patient_id
+            WHERE a.appointment_id = %s
+        """, (appointment_id,))
         appointment_ = []
 
         if result > 0:
@@ -19,15 +26,22 @@ def appointments(appointment_id):
         cur.close()
         return render_template('appointments/view_appointment.html', appointments=appointment_)
     else:
-        cur = mysql.connection.cursor()
-        result = cur.execute("SELECT * FROM appointments")
+        # Query to get all appointments along with doctor and patient names
+        result = cur.execute("""
+            SELECT a.appointment_id, a.appointment_date, a.purpose, d.name AS doctor_name, p.name AS patient_name
+            FROM appointments a
+            JOIN doctors d ON a.doctor_id = d.doctor_id
+            JOIN patients p ON a.patient_id = p.patient_id
+        """)
         appointments_ = []
 
         if result > 0:
             data = cur.fetchall()
             appointments_ = [dict(zip([key[0] for key in cur.description], row)) for row in data]
+
         cur.close()
         return render_template('appointments/appointments.html', appointments=appointments_)
+
 
 
 @appointments_bp.route('/add_appointment', methods=['GET', 'POST'])

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from app import mysql
+from db import mysql
 
 patients_bp = Blueprint('patients', __name__)
 

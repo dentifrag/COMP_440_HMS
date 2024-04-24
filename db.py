@@ -1,15 +1,11 @@
 from flask_mysqldb import MySQL
 
+mysql = MySQL()
 
-def get_db_connection():
-    try:
-        connection = mysql.connector.connect(
-            host='your_host',
-            database='your_database',
-            user='your_user',
-            password='your_password'
-        )
-        return connection
-    except Error as e:
-        print(f"Error: {e}")
-        return None
+
+def init_app(app):
+    app.config['MYSQL_HOST'] = 'localhost'
+    app.config['MYSQL_USER'] = 'root'
+    app.config['MYSQL_PASSWORD'] = 'root'
+    app.config['MYSQL_DB'] = 'hospitalmanagementsystem'
+    mysql.init_app(app)

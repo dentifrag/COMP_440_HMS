@@ -12,12 +12,69 @@ body {
 }
 
 header {
+    display: flex; /* Use flexbox to align items */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center; /* Center items vertically */
     background: #50b3a2;
     color: white;
     padding-top: 30px;
+    padding-bottom: 30px;
     min-height: 70px;
     border-bottom: #e8491d 3px solid;
 }
+
+nav {
+    display: flex; /* Use flexbox for navigation links */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Use flexbox for navigation links */
+}
+
+nav li {
+    margin: 0 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+nav a:hover {
+    color: #e8491d;
+}
+
+/* Adjustments for the search bar */
+.search {
+    margin-left: 20px;
+}
+
+.search input[type="text"] {
+    border: none;
+    padding: 8px;
+    width: 180px;
+    margin-right: 5px;
+}
+
+.search button {
+    padding: 8px 15px;
+    background-color: #e8491d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search button:hover {
+    background-color: #cf401b;
+}
+
 
 header a {
     color: #ffffff;

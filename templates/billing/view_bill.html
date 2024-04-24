@@ -8,19 +8,21 @@
     <table>
         <thead>
             <tr>
-                {% if billing %}
-                    {% for column in billing[0].keys() %}
-                        <th>{{ column }}</th>
-                    {% endfor %}
-                {% endif %}
+                <th>Bill ID</th>
+                <th>Patient Name</th>
+                <th>Amount</th>
+                <th>Bill Date</th>
+                <th>Payment Status</th>
             </tr>
         </thead>
         <tbody>
             {% for bill in billing %}
             <tr>
-                {% for value in bill.values() %}
-                    <td>{{ value }}</td>
-                {% endfor %}
+                <td><a href="{{ url_for('billing.billing', bill_id=bill.bill_id) }}">{{ bill.bill_id }}</a></td>
+                <td>{{ bill.patient_name }}</td>
+                <td>{{ bill.amount }}</td>
+                <td>{{ bill.bill_date }}</td>
+                <td>{{ bill.payment_status }}</td>
             </tr>
             {% endfor %}
         </tbody>

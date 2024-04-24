@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from app import mysql
+from db import mysql
 
 doctors_bp = Blueprint('doctors', __name__)
 

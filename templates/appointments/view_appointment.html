@@ -1,26 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Patients List</h2>
+    <h2>Appointment Details</h2>
     <a href="{{ url_for('appointments.add_appointment') }}">Add New Appointment</a>
-    <a href="{{ url_for('appointments.edit_appointment', appointment_id = appointments[0].appointment_id) }}">Edit Appointment</a>
+    <a href="{{ url_for('appointments.edit_appointment', appointment_id=appointments[0].appointment_id) }}">Edit Appointment</a>
     <a href="{{ url_for('appointments.delete_appointment', appointment_id=appointments[0].appointment_id) }}">Delete Appointment</a>
     <table>
         <thead>
             <tr>
-                {% if appointments %}
-                    {% for column in appointments[0].keys() %}
-                        <th>{{ column }}</th>
-                    {% endfor %}
-                {% endif %}
+                <th>Appointment ID</th>
+                <th>Date</th>
+                <th>Purpose</th>
+                <th>Doctor's Name</th>
+                <th>Patient's Name</th>
             </tr>
         </thead>
         <tbody>
             {% for appointment in appointments %}
             <tr>
-                {% for value in appointment.values() %}
-                    <td>{{ value }}</td>
-                {% endfor %}
+                <td>{{ appointment.appointment_id }}</td>
+                <td>{{ appointment.appointment_date }}</td>
+                <td>{{ appointment.purpose }}</td>
+                <td>{{ appointment.doctor_name }}</td>
+                <td>{{ appointment.patient_name }}</td>
             </tr>
             {% endfor %}
         </tbody>
