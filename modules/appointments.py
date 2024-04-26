@@ -9,7 +9,6 @@ appointments_bp = Blueprint('appointments', __name__)
 def appointments(appointment_id):
     cur = mysql.connection.cursor()
     if appointment_id is not None:
-        # Query to get a specific appointment along with doctor and patient names
         result = cur.execute("""
             SELECT a.appointment_id, a.appointment_date, a.purpose, d.name AS doctor_name, p.name AS patient_name
             FROM appointments a
@@ -26,7 +25,6 @@ def appointments(appointment_id):
         cur.close()
         return render_template('appointments/view_appointment.html', appointments=appointment_)
     else:
-        # Query to get all appointments along with doctor and patient names
         result = cur.execute("""
             SELECT a.appointment_id, a.appointment_date, a.purpose, d.name AS doctor_name, p.name AS patient_name
             FROM appointments a
@@ -41,7 +39,6 @@ def appointments(appointment_id):
 
         cur.close()
         return render_template('appointments/appointments.html', appointments=appointments_)
-
 
 
 @appointments_bp.route('/add_appointment', methods=['GET', 'POST'])
@@ -62,7 +59,6 @@ def add_appointment():
         cur.close()
         return redirect(url_for('appointments.appointments'))
 
-    # For a GET request, fetch the necessary data for the form
     cur = mysql.connection.cursor()
     cur.execute("SELECT doctor_id, name FROM doctors")
     doctors = cur.fetchall()
@@ -94,7 +90,6 @@ def edit_appointment(appointment_id):
         cur.close()
         return redirect(url_for('appointments.appointments'))
 
-    # For a GET request, fetch the necessary data for the form
     cur = mysql.connection.cursor()
     cur.execute("SELECT doctor_id, name FROM doctors")
     doctors = cur.fetchall()
@@ -122,3 +117,43 @@ def delete_appointment(appointment_id):
         cur.close()
         return redirect(url_for('appointments.appointments'))
     return render_template('appointments/confirm_delete.html')
+
+
+@appointments_bp.route('/patient/<patient_id>', methods=['GET'])
+def patient_appointments(patient_id):
+    cur = mysql.connection.cursor()
+    result = cur.execute("""
+        SELECT a.appointment_id, a.appointment_date, a.purpose, p.name AS patient_name, d.name AS doctor_name
+        FROM appointments a
+        JOIN patients p ON a.patient_id = p.patient_id
+        JOIN doctors d ON a.doctor_id = d.doctor_id
+        WHERE a.patient_id = %s
+    """, (patient_id,))
+    appointments_ = []
+
+    if result > 0:
+        data = cur.fetchall()
+        appointments_ = [dict(zip([key[0] for key in cur.description], row)) for row in data]
+
+    cur.close()
+    return render_template('appointments/appointments.html', appointments=appointments_)
+
+
+@appointments_bp.route('/doctor/<doctor_id>', methods=['GET'])
+def doctor_appointments(doctor_id):
+    cur = mysql.connection.cursor()
+    result = cur.execute("""
+            SELECT a.appointment_id, a.appointment_date, a.purpose, p.name AS patient_name, d.name AS doctor_name
+            FROM appointments a
+            JOIN patients p ON a.patient_id = p.patient_id
+            JOIN doctors d ON a.doctor_id = d.doctor_id
+            WHERE a.doctor_id = %s
+        """, (doctor_id,))
+    appointments_ = []
+
+    if result > 0:
+        data = cur.fetchall()
+        appointments_ = [dict(zip([key[0] for key in cur.description], row)) for row in data]
+
+    cur.close()
+    return render_template('appointments/appointments.html', appointments=appointments_)

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Doctor</h2>
+    <a href="{{ url_for('appointments.doctor_appointments', doctor_id=doctors[0].doctor_id) }}" class="button">View
+        Appointments</a>
+    <table>
+        <thead>
+        <tr>
+            <th>Doctor ID</th>
+            <th>Name</th>
+            <th>Speciality</th>
+            <th>Contact Info</th>
+            <th>Room Number</th>
+            <th>Availability</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for doctor in doctors %}
+        <tr>
+            <td>{{ doctor.doctor_id }}</td>
+            <td>{{ doctor.name }}</td>
+            <td>{{ doctor.speciality }}</td>
+            <td>{{ doctor.contact_info }}</td>
+            <td>{{ doctor.room_number }}</td>
+            <td>{{ doctor.availability }}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}

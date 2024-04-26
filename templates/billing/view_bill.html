@@ -2,9 +2,9 @@
 
 {% block content %}
     <h2>Bill</h2>
-    <a href="{{ url_for('billing.add_bill') }}">Add New Patient</a>
-    <a href="{{ url_for('billing.edit_bill', bill_id = billing[0].bill_id) }}">Edit Bill</a>
-    <a href="{{ url_for('billing.delete_bill', bill_id=billing[0].bill_id) }}">Delete Bill</a>
+    <a href="{{ url_for('billing.add_bill') }}" class="button">Add New Patient</a>
+    <a href="{{ url_for('billing.edit_bill', bill_id = billing[0].bill_id) }}" class="button">Edit Bill</a>
+    <a href="{{ url_for('billing.delete_bill', bill_id=billing[0].bill_id) }}" class="button">Delete Bill</a>
     <table>
         <thead>
             <tr>

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect
 from db import init_app
 from modules.appointments import appointments_bp
 from modules.doctors import doctors_bp
@@ -16,6 +16,12 @@ app.register_blueprint(doctors_bp, url_prefix='/doctors')
 app.register_blueprint(patients_bp, url_prefix='/patients')
 app.register_blueprint(billing_bp, url_prefix='/billing')
 app.register_blueprint(search_bp, url_prefix='/search')
+
+
+@app.route('/')
+def index():
+    return redirect('/patients')
+
 
 if __name__ == "__main__":
     app.run(debug=True)

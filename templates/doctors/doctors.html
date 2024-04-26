@@ -3,21 +3,25 @@
 {% block content %}
     <h2>Doctors</h2>
     <table>
-        <thead>
+    <thead>
         <tr>
-            {% if doctors %}
-                {% for column in doctors[0].keys() %}
-                    <th>{{ column }}</th>
-                {% endfor %}
-            {% endif %}
+            <th>Doctor ID</th>
+            <th>Doctor Name</th>
+            <th>Specialization</th>
+            <th>Contact Info</th>
+            <th>Room Number</th>
+            <th>Availability</th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
         {% for doctor in doctors %}
             <tr>
-                {% for value in doctor.values() %}
-                    <td>{{ value }}</td>
-                {% endfor %}
+                <td><a href="{{ url_for('doctors.doctors', doctor_id=doctor.doctor_id) }}">{{ doctor.doctor_id }}</a></td>
+                <td>{{ doctor.name }}</td>
+                <td>{{ doctor.specialty }}</td>
+                <td>{{ doctor.contact_info }}</td>
+                <td>{{ doctor.room_number }}</td>
+                <td>{{ doctor.availability }}</td>
             </tr>
         {% endfor %}
     </table>

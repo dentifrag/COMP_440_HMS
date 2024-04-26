@@ -2,9 +2,11 @@
 
 {% block content %}
     <h2>Patients List</h2>
-    <a href="{{ url_for('patients.add_patient') }}">Add New Patient</a>
-    <a href="{{ url_for('patients.edit_patient', patient_id = patients[0].patient_id) }}">Edit Patient</a>
-    <a href="{{ url_for('patients.delete_patient', patient_id=patients[0].patient_id) }}">Delete Patient</a>
+    <a href="{{ url_for('patients.add_patient') }}" class="button">Add New Patient</a>
+    <a href="{{ url_for('patients.edit_patient', patient_id = patients[0].patient_id) }}" class="button">Edit Patient</a>
+    <a href="{{ url_for('patients.delete_patient', patient_id=patients[0].patient_id) }}" class="button">Delete Patient</a>
+    <a href="{{ url_for('appointments.patient_appointments', patient_id=patients[0].patient_id) }}" class="button">View Appointments</a>
+
     <table>
         <thead>
             <tr>

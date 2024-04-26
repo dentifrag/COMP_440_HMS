@@ -2,9 +2,9 @@
 
 {% block content %}
     <h2>Appointment Details</h2>
-    <a href="{{ url_for('appointments.add_appointment') }}">Add New Appointment</a>
-    <a href="{{ url_for('appointments.edit_appointment', appointment_id=appointments[0].appointment_id) }}">Edit Appointment</a>
-    <a href="{{ url_for('appointments.delete_appointment', appointment_id=appointments[0].appointment_id) }}">Delete Appointment</a>
+    <a href="{{ url_for('appointments.add_appointment') }}" class="button">Add New Appointment</a>
+    <a href="{{ url_for('appointments.edit_appointment', appointment_id=appointments[0].appointment_id) }}" class="button">Edit Appointment</a>
+    <a href="{{ url_for('appointments.delete_appointment', appointment_id=appointments[0].appointment_id) }}" class="button">Delete Appointment</a>
     <table>
         <thead>
             <tr>

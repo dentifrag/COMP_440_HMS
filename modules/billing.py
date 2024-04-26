@@ -9,7 +9,6 @@ billing_bp = Blueprint('billing', __name__)
 def billing(bill_id):
     cur = mysql.connection.cursor()
     if bill_id is not None:
-        # Query to get a specific bill along with patient name
         result = cur.execute("""
             SELECT b.bill_id, b.amount, b.bill_date, b.payment_status, p.name AS patient_name
             FROM billing b
@@ -25,7 +24,6 @@ def billing(bill_id):
         cur.close()
         return render_template('billing/view_bill.html', billing=billing_)
     else:
-        # Query to get all bills along with patient names
         result = cur.execute("""
             SELECT b.bill_id, b.amount, b.bill_date, b.payment_status, p.name AS patient_name
             FROM billing b
@@ -39,7 +37,6 @@ def billing(bill_id):
 
         cur.close()
         return render_template('billing/billing.html', billing=billing_)
-
 
 
 @billing_bp.route('/add_bill', methods=['GET', 'POST'])

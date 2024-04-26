@@ -19,8 +19,8 @@
                     <td>
                         {% if result[1] == 'Patient' %}
                             <a href="{{ url_for('patients.patients', patient_id=result[2]) }}">View Details</a>
-{#                        {% elif result[1] == 'Doctor' %}#}
-{#                            <a href="{{ url_for('doctors.view_doctor', doctor_id=result[2]) }}">View Details</a>#}
+                        {% elif result[1] == 'Doctor' %}
+                            <a href="{{ url_for('doctors.doctors', doctor_id=result[2]) }}">View Details</a>
                         {% endif %}
                     </td>
                 </tr>
