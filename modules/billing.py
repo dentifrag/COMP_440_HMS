@@ -97,3 +97,22 @@ def delete_bill(bill_id):
         cur.close()
         return redirect(url_for('billing.billing'))
     return render_template('billing/confirm_delete.html', bill_id=bill_id)
+
+
+@billing_bp.route('/patient/<patient_id>', methods=['GET'])
+def patient_bills(patient_id):
+    cur = mysql.connection.cursor()
+    result = cur.execute("""
+        SELECT b.bill_id, b.amount, b.bill_date, b.payment_status, p.name AS patient_name
+        FROM billing b
+        JOIN patients p ON b.patient_id = p.patient_id
+        WHERE b.patient_id = %s
+    """, (patient_id,))
+    billing_ = []
+
+    if result > 0:
+        data = cur.fetchall()
+        billing_ = [dict(zip([key[0] for key in cur.description], row)) for row in data]
+
+    cur.close()
+    return render_template('billing/billing.html', billing=billing_)

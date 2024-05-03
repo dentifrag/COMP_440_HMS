@@ -50,9 +50,7 @@ nav a:hover {
 }
 
 /* Adjustments for the search bar */
-.search {
-    margin-left: 20px;
-}
+
 
 .search input[type="text"] {
     border: none;
@@ -189,34 +187,33 @@ input[type="submit"]:hover {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    text-decoration: none; /* Remove underline from links */
-    display: inline-block; /* Align correctly with other inline or inline-block elements */
-    margin: 5px; /* Spacing around the button */
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .button-link:hover, .button-link:focus {
     background-color: #50b3a2;
     color: white;
-    text-decoration: none; /* Ensure underline doesn't reappear on hover */
+    text-decoration: none;
 }
 
 .button {
-    background-color: #50b3a2; /* Teal background to match header */
+    background-color: #50b3a2;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    text-decoration: none; /* Remove underline from links */
-    display: inline-block; /* Align correctly with other inline or inline-block elements */
-    margin: 5px; /* Spacing around the button */
+    text-decoration: none;
+    display: inline-block;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .button:hover {
-    background-color: #46918f; /* Slightly darker teal on hover */
-    color: white; /* Keep text white on hover */
+    background-color: #46918f;
+    color: white;
 }
 

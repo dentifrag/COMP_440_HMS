@@ -1,0 +1,25 @@
+services:
+  web:
+    volumes:
+      - .:/app
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+  db:
+    image: mysql:8.3
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hospitalmanagementsystem
+    ports:
+      - "3306:3306"
+
+volumes:
+  db-data:
